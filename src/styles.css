@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background: #212121;
+    color: #d3d3d3;
+}
+
+hr {
+    background-color: #d3d3d3;
+}
+
+a {
+    cursor : pointer;
+}
+
+.dropdown-menu {
+    background-color: #343a40;
+}
+
+.dropdown-item {
+    color: #ddd !important;
+    background-color: #343a40;
+    transition: 0.1s ease-in-out;
+}
+
+.dropdown-item:hover {
+    background-color: #ddd;
+    color: #343a40 !important;
+    transition: 0.1s ease-in-out;
+}

@@ -1,0 +1,25 @@
+<div class="dropdown mb-5">
+    <button class="btn btn-outline-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filter
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button (click)="getCompanies()" class="dropdown-item">All Companies</button>
+        <button (click)='getFilterCompanies(unique)' *ngFor='let unique of uniqueValues' class="dropdown-item">
+          {{ unique }} Companies
+        </button>
+    </div>
+  </div>
+
+  <div *ngIf='loading' class="text-center">
+    <app-loader></app-loader>
+  </div>
+  
+
+<ul *ngIf='!loading' class="list-group">
+    <li *ngFor='let company of companies' class="list-group-item mb-1 bg-secondary">
+        <h4>{{ company.name | uppercase }}</h4>
+        <span> Category: <span class="text-warning">{{ company.category }}</span></span>
+        <br>
+        <button routerLink="/company/{{ company.id }}" class="btn btn-outline-warning mt-3" >Details</button>
+    </li>
+</ul>

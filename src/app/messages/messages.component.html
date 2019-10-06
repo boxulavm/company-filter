@@ -1,0 +1,6 @@
+<div class="p-3 bg-dark mb-5" *ngIf="messageService.messages.length">
+    <h3>Messages</h3>
+    <p class="text-warning" *ngFor='let message of messageService.messages'> <i>{{message}}</i> </p>
+        <button class="btn btn-outline-danger text-right"
+        (click)="messageService.clear()">Clear</button>
+</div>

@@ -14,9 +14,8 @@ export class CompanyService {
 
   constructor(private messageService: MessageService) { }
 
-  getCompanies(): Company[]{
+  setFetchMsg(){
     this.messageService.add("Company Service: 'Fetched Companies!");
-    return companies;
   }
 
   setFilterMessage(categoryName){

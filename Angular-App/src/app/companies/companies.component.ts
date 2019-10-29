@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { Company } from '../company'
 
+
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
@@ -16,16 +17,32 @@ export class CompaniesComponent implements OnInit {
 
   constructor(private companyService: CompanyService) { }
 
-  getCompanies():void {
-    this.companies = this.companyService.getCompanies();
+  async getCompanies() {
+
+    try {
+
+      const res = await fetch ('http://localhost:3000/companies')
+      const data = await res.json();
+      this.companies = [...data.companies]
+
+      await this.companyService.setFetchMsg();
+      await this.getCopyCompanies();   
+      await this.getUniqueValues();
+  
+    } catch (error) {
+
+      console.log(error)
+
+    }
+
   }
 
   getCopyCompanies(){
-    return this.copyCompanies = [...this.companies];
+      return this.copyCompanies = [...this.companies];
   }
 
   getUniqueValues(){
-    this.uniqueValues = [...new Set(this.companies.map(company => company.category))] ;
+    return this.uniqueValues = [...new Set(this.companies.map(company => company.category))] ;
   }
 
   getFilterCompanies(category) {
@@ -34,17 +51,18 @@ export class CompaniesComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
       this.companyService.setFilterMessage(category);
-    }, 500);
+    }, 300);
   }
 
   ngOnInit() {
     this.loading = true;
+
     setTimeout(() => {
       this.getCompanies();
-      this.getCopyCompanies();
-      this.getUniqueValues();
       this.loading =  false;
     }, 500);
+    
+    
   }
 
 
